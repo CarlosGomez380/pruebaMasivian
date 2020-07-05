@@ -28,22 +28,27 @@ public class Bet {
         }
     }
     public void invalidAmount(){
-        for(int i=0;i<amountNumbers.size();i++){
-            if(totalAmount<10000 || amountNumbers.get(i) + totalAmount > 10000){
+        int i= 0;
+        while(i<amountNumbers.size()){
+            if(amountNumbers.get(i) + totalAmount < 10000){
                 totalAmount+=amountNumbers.get(i);
-            }else{
+                i+=1;
+            }
+            else{
                 amountNumbers.remove(i);
                 numbers.remove(i);
             }
         }
-        for(int i=0;i<amountColors.size();i++){
-            if(totalAmount<10000 || amountColors.get(i) + totalAmount > 10000 ){
+        i=0;
+        while(i<amountNumbers.size()){
+            if(amountColors.get(i) + totalAmount < 10000){
                 totalAmount+=amountColors.get(i);
-            }else{
+                i+=1;
+            }
+            else{
                 amountColors.remove(i);
                 colors.remove(i);
             }
         }
     }
-
 }

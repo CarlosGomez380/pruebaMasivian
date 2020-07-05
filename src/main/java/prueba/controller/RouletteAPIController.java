@@ -53,7 +53,7 @@ public class RouletteAPIController {
         }
     }
     @RequestMapping( method = RequestMethod.GET)
-    public ResponseEntity<?> endOfBet() {
+    public ResponseEntity<?> getAllRoulette() {
         try {
             return new ResponseEntity<>(rouletteService.getAllRoulette(), HttpStatus.ACCEPTED);
         } catch (Exception e) {
