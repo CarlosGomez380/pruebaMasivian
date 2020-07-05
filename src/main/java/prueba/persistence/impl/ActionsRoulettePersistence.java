@@ -7,10 +7,9 @@ import prueba.model.Roulette;
 @Service("Action")
 public class ActionsRoulettePersistence implements RoulettePersistence {
 
-    public String addRoulette(){
-        Roulette roulette= new Roulette();
-        return roulette.getId();
+    public String addRoulette(){ return new Roulette().getId(); }
+
+    public void openRoulette(String id){
+
     }
-
-
 }

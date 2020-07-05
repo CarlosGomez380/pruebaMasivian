@@ -1,7 +1,10 @@
 package prueba.model;
 
+import org.springframework.data.redis.core.RedisHash;
+
 import java.util.UUID;
 
+@RedisHash("Roulette")
 public class Roulette {
 
     private boolean open;
