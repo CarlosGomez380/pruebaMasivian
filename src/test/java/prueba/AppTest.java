@@ -1,6 +1,5 @@
 package prueba;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import com.google.gson.Gson;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -22,7 +21,6 @@ import prueba.services.RouletteService;
 import redis.embedded.RedisServerBuilder;
 import java.io.IOException;
 import java.util.ArrayList;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes={ App.class })
 @ContextConfiguration(classes = RedisConfig.class)
@@ -63,23 +61,25 @@ public class AppTest {
                 .andExpect(status().isNoContent());
     }
     @Test
-    public void shouldCreateABet() throws Exception {
+    public void shouldEndRoulette() throws Exception {
         Roulette roulette= new Roulette();
         rouletteRepository.save(roulette);
-        final Roulette retrievedRoulette = rouletteRepository.findById(roulette.getId()).get();
-        retrievedRoulette.setOpen(true);
-        roulette.setOpen(true);
-        rouletteRepository.save(roulette);
-        ArrayList<Integer> numbers = new ArrayList<>();
+        ArrayList<Bet> bets= new ArrayList<>();
+        ArrayList<Integer> numbers= new ArrayList<>();
+        ArrayList<String> colors = new ArrayList<>();
+        ArrayList<Integer> amountNumbers= new ArrayList<>();
+        ArrayList<Integer> amountColors= new ArrayList<>();
         numbers.add(32);
         numbers.add(10);
-        Bet bet= new Bet(numbers, "Black", 200);
-        String json = new Gson().toJson(numbers);
+        amountNumbers.add(302);
+        amountNumbers.add(100);
+        Bet bet= new Bet(numbers,colors,amountNumbers,amountColors);
+        bets.add(bet);
+        roulette.setBets(bets);
+        rouletteRepository.save(roulette);
         mvc.perform(
-                MockMvcRequestBuilders.post("/roulette/"+roulette.getId()+"/"+bet.getColor()+"/"+bet.getAmount())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON)
-                        .content(json))
-                .andExpect(status().isCreated());
+                MockMvcRequestBuilders.get("/roulette/"+roulette.getId())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isAccepted());
     }
 }

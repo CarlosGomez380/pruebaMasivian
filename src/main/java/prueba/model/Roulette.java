@@ -21,4 +21,5 @@ public class Roulette {
     public void setId(String id) { this.id = id; }
     public void setOpen(boolean open) { this.open = open; }
     public ArrayList<Bet> getBets() { return bets; }
+    public void setBets(ArrayList<Bet> bets) { this.bets = bets; }
 }

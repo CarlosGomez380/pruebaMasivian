@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import prueba.model.Bet;
 import prueba.persistence.RouletteException;
 import prueba.persistence.RoulettePersistence;
+
+import java.util.ArrayList;
+
 @Service("rouletteServices")
 public class RouletteService {
     @Autowired
@@ -13,4 +16,5 @@ public class RouletteService {
     public String addRoulette(){ return roulettePersistence.addRoulette(); }
     public void openRoulette(String id) throws RouletteException { roulettePersistence.openRoulette(id);}
     public void betOnANumberOrColor(String id,Bet bet) throws RouletteException{ roulettePersistence.betOnANumberOrColor(id,bet); }
+    public ArrayList<Bet> endOfBet(String id) throws RouletteException{ return roulettePersistence.endOfBet(id);}
 }
