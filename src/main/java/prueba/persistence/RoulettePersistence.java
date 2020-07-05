@@ -6,4 +6,5 @@ import org.springframework.stereotype.Service;
 public interface RoulettePersistence {
 
     public String addRoulette();
+    public void openRoulette(String id) throws RouletteException;
 }
