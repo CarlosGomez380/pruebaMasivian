@@ -1,4 +1,5 @@
 package prueba.persistence.impl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import prueba.model.Bet;
@@ -7,6 +8,8 @@ import prueba.persistence.RoulettePersistence;
 import prueba.model.Roulette;
 import prueba.repo.RouletteRepository;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service("Action")
 public class ActionsRoulettePersistence implements RoulettePersistence {
@@ -49,5 +52,13 @@ public class ActionsRoulettePersistence implements RoulettePersistence {
         rouletteRepository.findById(id).get().setOpen(open);
         retrievedRoulette.setOpen(open);
         rouletteRepository.save(rouletteRepository.findById(id).get());
+    }
+    public Map<Roulette,Boolean> getAllRoulette(){
+        Map<Roulette,Boolean> roulettes= new HashMap<>();
+        Iterable<Roulette> roulettess=rouletteRepository.findAll();
+        for(Roulette rl:  roulettess){
+            roulettes.put(rl, rl.isOpen());
+        }
+        return roulettes;
     }
 }

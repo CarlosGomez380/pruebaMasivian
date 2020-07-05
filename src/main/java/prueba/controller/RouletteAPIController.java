@@ -52,4 +52,12 @@ public class RouletteAPIController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    @RequestMapping( method = RequestMethod.GET)
+    public ResponseEntity<?> endOfBet() {
+        try {
+            return new ResponseEntity<>(rouletteService.getAllRoulette(), HttpStatus.ACCEPTED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

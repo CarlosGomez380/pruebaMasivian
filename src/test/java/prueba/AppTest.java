@@ -82,4 +82,15 @@ public class AppTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isAccepted());
     }
+    @Test
+    public void shouldReturnRoulette() throws Exception {
+        Roulette roulette= new Roulette();
+        rouletteRepository.save(roulette);
+        Roulette roulette1= new Roulette();
+        rouletteRepository.save(roulette1);
+        mvc.perform(
+                MockMvcRequestBuilders.get("/roulette/")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isAccepted());
+    }
 }
